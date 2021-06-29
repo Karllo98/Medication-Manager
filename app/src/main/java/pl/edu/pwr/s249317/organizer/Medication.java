@@ -6,12 +6,14 @@ public class Medication {
     private String name;
     private int amount;
     private String expiryDate;
+    private String comments;
 
-    public Medication(int id, String name, int amount, String expiryDate) {
+    public Medication(int id, String name, int amount, String expiryDate, String comments) {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.expiryDate = expiryDate;
+        this.comments = comments;
     }
 
     public Medication() { }
@@ -23,6 +25,7 @@ public class Medication {
                 ", name='" + name + '\'' +
                 ", amount=" + amount +
                 ", expiryDate='" + expiryDate + '\'' +
+                ", comments='" + comments + '\'' +
                 '}';
     }
 

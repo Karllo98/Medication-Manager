@@ -24,6 +24,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        buttonYourMedications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, YourMedicationActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initialazeViews(){

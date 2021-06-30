@@ -28,14 +28,22 @@ public class NewMedicationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Medication medication;
+
                 try {
-                    Medication medication = new Medication(-1, editTextName.getText().toString(), Integer.parseInt(editTextAmount.getText().toString()),
+                    medication = new Medication(-1, editTextName.getText().toString(), Integer.parseInt(editTextAmount.getText().toString()),
                             editTextExpiryDate.getText().toString(), editTextComments.getText().toString());
                     Toast.makeText(NewMedicationActivity.this, medication.toString(), Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception exception) {
                     Toast.makeText(NewMedicationActivity.this, "Error, invalid data format", Toast.LENGTH_SHORT).show();
+                    medication = new Medication(-1, "error", 0, "error", "error");
                 }
+
+                MedicationDataBase medicationDataBase = new MedicationDataBase(NewMedicationActivity.this);
+                boolean success = medicationDataBase.addToDataBase(medication);
+
+                Toast.makeText(NewMedicationActivity.this, "" + success, Toast.LENGTH_SHORT).show();
 
             }
         });

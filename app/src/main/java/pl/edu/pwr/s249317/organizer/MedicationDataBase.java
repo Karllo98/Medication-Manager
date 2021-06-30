@@ -81,7 +81,7 @@ public class MedicationDataBase extends SQLiteOpenHelper {
         return list;
     }
 
-    public List<Medication> sortMedications() {
+    public List<Medication> sortAllMedications() {
 
         List<Medication> list = new ArrayList<>();
         String query = "SELECT * FROM " + MEDICATION_TB + " ORDER BY " + EXPIRY_DATE;

@@ -60,16 +60,16 @@ public class NewMedicationActivity extends AppCompatActivity {
                 Toast.makeText(NewMedicationActivity.this, "" + success, Toast.LENGTH_SHORT).show();
 
 
-                Intent intent1 = new Intent(NewMedicationActivity.this, Broadcaster.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(NewMedicationActivity.this,0,intent1,0);
+                Intent broadcastIntent = new Intent(NewMedicationActivity.this, Broadcaster.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(NewMedicationActivity.this,0,broadcastIntent,0);
 
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
                 long currentTime = System.currentTimeMillis();
 
-                long tensecondsinms = 1000 * 10;
+                long tenSecondsInMs = 1000 * 10;
 
-                alarmManager.set(AlarmManager.RTC_WAKEUP, currentTime + tensecondsinms, pendingIntent);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, currentTime + tenSecondsInMs, pendingIntent);
 
             }
         });

@@ -23,7 +23,7 @@ public class Medication {
         return  name + "\n" + "\n" +
                 "Amount: " + amount + "\n" +
                 "Expiry Date: " + expiryDate + "\n" +
-                "Comments: = " + comments + "\n";
+                "Comments: " + comments + "\n";
     }
 
     /* Getters and Setters */

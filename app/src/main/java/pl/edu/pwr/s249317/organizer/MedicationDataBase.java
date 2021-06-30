@@ -81,6 +81,33 @@ public class MedicationDataBase extends SQLiteOpenHelper {
         return list;
     }
 
+    public List<Medication> sortMedications() {
+
+        List<Medication> list = new ArrayList<>();
+        String query = "SELECT * FROM " + MEDICATION_TB + " ORDER BY " + EXPIRY_DATE;
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                int amount = cursor.getInt(2);
+                String expiryDate = cursor.getString(3);
+                String comments = cursor.getString(4);
+
+                Medication medication = new Medication(id, name, amount, expiryDate, comments);
+                list.add(medication);
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+
+        return list;
+    }
+
     public boolean deleteFromDataBase(Medication medication) {
         SQLiteDatabase database = this.getWritableDatabase();
         String query = "DELETE FROM " + MEDICATION_TB + " WHERE " + ID + " = " + medication.getId();

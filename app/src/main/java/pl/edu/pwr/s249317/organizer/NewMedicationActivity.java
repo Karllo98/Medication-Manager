@@ -2,6 +2,7 @@ package pl.edu.pwr.s249317.organizer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,8 +11,8 @@ import android.widget.Toast;
 
 public class NewMedicationActivity extends AppCompatActivity {
 
-    Button buttonConfirmAdding;
-    EditText editTextName, editTextAmount, editTextExpiryDate, editTextComments;
+    private Button buttonConfirmAdding, buttonGoToYourMedication;
+    private EditText editTextName, editTextAmount, editTextExpiryDate, editTextComments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class NewMedicationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_medication);
 
         buttonConfirmAdding = findViewById(R.id.buttonConfirmAdding);
+        buttonGoToYourMedication = findViewById(R.id.buttonGoToAdd);
         editTextName = findViewById(R.id.editTextName);
         editTextAmount = findViewById(R.id.editTextAmount);
         editTextExpiryDate = findViewById(R.id.editTextExpiryDate);
@@ -47,5 +49,13 @@ public class NewMedicationActivity extends AppCompatActivity {
 
             }
         });
+
+//        buttonGoToYourMedication.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(NewMedicationActivity.this, YourMedicationActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }

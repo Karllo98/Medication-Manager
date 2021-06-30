@@ -2,10 +2,14 @@ package pl.edu.pwr.s249317.organizer;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MedicationDataBase extends SQLiteOpenHelper {
 
@@ -48,5 +52,42 @@ public class MedicationDataBase extends SQLiteOpenHelper {
         else
             return true;
 
+    }
+
+    public List<Medication> getAllMedications() {
+
+        List<Medication> list = new ArrayList<>();
+        String query = "SELECT * FROM " + MEDICATION_TB;
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                int amount = cursor.getInt(2);
+                String expiryDate = cursor.getString(3);
+                String comments = cursor.getString(4);
+
+                Medication medication = new Medication(id, name, amount, expiryDate, comments);
+                list.add(medication);
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+
+        return list;
+    }
+
+    public boolean deleteFromDataBase(Medication medication) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        String query = "DELETE FROM " + MEDICATION_TB + " WHERE " + ID + " = " + medication.getId();
+        Cursor cursor = database.rawQuery(query, null);
+
+        if (cursor.moveToFirst())
+            return true;
+        else return false;
     }
 }

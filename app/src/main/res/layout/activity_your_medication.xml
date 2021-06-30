@@ -11,31 +11,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:text="Add new"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonDelete"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/buttonGoToAdd" />
 
     <ListView
         android:id="@+id/medicationList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonDelete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

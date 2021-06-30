@@ -20,13 +20,10 @@ public class Medication {
 
     @Override
     public String toString() {
-        return "Medication{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", amount=" + amount +
-                ", expiryDate='" + expiryDate + '\'' +
-                ", comments='" + comments + '\'' +
-                '}';
+        return  name + "\n" + "\n" +
+                "Amount: " + amount + "\n" +
+                "Expiry Date: " + expiryDate + "\n" +
+                "Comments: = " + comments + "\n";
     }
 
     /* Getters and Setters */

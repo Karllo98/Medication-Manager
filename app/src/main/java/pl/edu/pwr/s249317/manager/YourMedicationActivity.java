@@ -12,9 +12,7 @@ import android.widget.ListView;
 
 public class YourMedicationActivity extends AppCompatActivity {
 
-    private Button buttonGoToAdd;
     private ListView medicationList;
-    private ArrayAdapter arrayAdapter;
     private MedicationDataBase medicationDataBase;
 
     @Override
@@ -22,11 +20,11 @@ public class YourMedicationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_medication);
 
-        buttonGoToAdd = findViewById(R.id.buttonGoToAdd);
+        Button buttonGoToAdd = findViewById(R.id.buttonGoToAdd);
         medicationList = findViewById(R.id.medicationList);
 
         medicationDataBase = new MedicationDataBase(YourMedicationActivity.this);
-        showAllMedications(medicationDataBase);
+        showAllMedicationsByAmount(medicationDataBase);
 
 
         buttonGoToAdd.setOnClickListener(new View.OnClickListener() {
@@ -42,14 +40,15 @@ public class YourMedicationActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Medication medication = (Medication) parent.getItemAtPosition(position);
                 medicationDataBase.deleteFromDataBase(medication);
-                showAllMedications(medicationDataBase);
+                showAllMedicationsByAmount(medicationDataBase);
                 return false;
             }
         });
     }
 
-    private void showAllMedications(MedicationDataBase dataBase) {
-        arrayAdapter = new ArrayAdapter<Medication>(YourMedicationActivity.this, android.R.layout.simple_list_item_1, dataBase.getAllMedications());
+    private void showAllMedicationsByAmount(MedicationDataBase dataBase) {
+        ArrayAdapter arrayAdapter = new ArrayAdapter<Medication>(YourMedicationActivity.this, android.R.layout.simple_list_item_1,
+                dataBase.getAllMedications("MEDICATION_PACKAGE_AMOUNT"));
         medicationList.setAdapter(arrayAdapter);
     }
 }

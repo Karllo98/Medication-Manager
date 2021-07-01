@@ -13,7 +13,7 @@ public class Broadcaster extends BroadcastReceiver{
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notifyMedication")
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle("Confirmed your medication!")
-                .setContentText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ")
+                .setContentText("Confirmed your medication!")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);

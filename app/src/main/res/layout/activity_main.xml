@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/buttonNext"
+        android:id="@+id/buttonTook"
         android:layout_width="350dp"
         android:layout_height="75dp"
         android:layout_marginStart="20dp"
@@ -31,7 +31,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonNext" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonTook" />
 
     <Button
         android:id="@+id/buttonYourMedications"
@@ -46,17 +46,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAdd" />
 
-    <TextView
-        android:id="@+id/textAuthor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginEnd="124dp"
-        android:layout_marginBottom="32dp"
-        android:text="Created by Karol Urbański"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/buttonExpiryDates"
+        android:layout_width="350dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:text="Check expiry dates"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonYourMedications" />
 
     <ImageView
         android:id="@+id/imageLogo"
@@ -69,4 +70,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginBottom="32dp"
+        android:text="Created by Karol Urbański"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,8 @@
 package pl.edu.pwr.s249317.manager;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Medication {
 
     private int id;
@@ -7,10 +10,10 @@ public class Medication {
     private int packagingAmount;
     private int amountInOnePackage;
     private int amountInNewOne;
-    private String expiryDate;
+    private long expiryDate;
     private String comments;
 
-    public Medication(int id, String name, int packagingAmount, int amountInOnePackage, int amountInNewOne, String expiryDate, String comments) {
+    public Medication(int id, String name, int packagingAmount, int amountInOnePackage, int amountInNewOne, long expiryDate, String comments) {
         this.id = id;
         this.name = name;
         this.packagingAmount = packagingAmount;
@@ -24,10 +27,15 @@ public class Medication {
 
     @Override
     public String toString() {
+
+        Date date = new Date(expiryDate);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM");
+        String formattedDate = simpleDateFormat.format(date);
+
         return  name + "\n" + "\n" +
                 "Amount: " + packagingAmount + "\n" +
                 "Amount in one package: " + amountInOnePackage + "\n" +
-                "Expiry Date: " + expiryDate + "\n" +
+                "Expiry Date: " + formattedDate + "\n" +
                 "Comments: " + comments + "\n";
     }
 
@@ -57,11 +65,11 @@ public class Medication {
         this.packagingAmount = packagingAmount;
     }
 
-    public String getExpiryDate() {
+    public long getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(String expiryDate) {
+    public void setExpiryDate(long expiryDate) {
         this.expiryDate = expiryDate;
     }
 

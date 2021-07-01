@@ -30,7 +30,7 @@ public class MedicationDataBase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE " + MEDICATION_TB + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 MEDICATION_NAME + " TEXT, " + MEDICATION_PACKAGE_AMOUNT + " INT, " + MEDICATION_IN_ONE_PACKAGE_AMOUNT + " INT, " +
-                MEDICATION_IN_NEW_ONE + " INT, " + EXPIRY_DATE + " TEXT, " + MEDICATION_COMMENTS + " TEXT)";
+                MEDICATION_IN_NEW_ONE + " INT, " + EXPIRY_DATE + " LONG, " + MEDICATION_COMMENTS + " TEXT)";
         db.execSQL(createTableStatement);
     }
 
@@ -59,10 +59,10 @@ public class MedicationDataBase extends SQLiteOpenHelper {
 
     }
 
-    public List<Medication> getAllMedications() {
+    public List<Medication> getAllMedications(String orderedBy) {
 
         List<Medication> list = new ArrayList<>();
-        String query = "SELECT * FROM " + MEDICATION_TB;
+        String query = "SELECT * FROM " + MEDICATION_TB + " ORDER BY " + orderedBy;
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor cursor = database.rawQuery(query, null);
 
@@ -73,7 +73,7 @@ public class MedicationDataBase extends SQLiteOpenHelper {
                 int packagingAmount = cursor.getInt(2);
                 int amountInOnePackage = cursor.getInt(3);
                 int amountInNewOne = cursor.getInt(4);
-                String expiryDate = cursor.getString(5);
+                long expiryDate = cursor.getLong(5);
                 String comments = cursor.getString(6);
 
                 Medication medication = new Medication(id, name, packagingAmount, amountInOnePackage, amountInNewOne, expiryDate, comments);

@@ -28,7 +28,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:ems="10"
-        android:hint="Expiry Date"
+        android:hint="YYYY/MM"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

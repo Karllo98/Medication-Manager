@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class NewMedicationActivity extends AppCompatActivity {
 
     private Button buttonConfirmAdding, buttonGoToYourMedication;
@@ -44,18 +47,22 @@ public class NewMedicationActivity extends AppCompatActivity {
                 Medication medication;
 
                 try {
+
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM");
+                    Date date = simpleDateFormat.parse(editTextExpiryDate.getText().toString());
+                    long dateInMilis = date.getTime();
+
                     medication = new Medication(-1, editTextName.getText().toString(), Integer.parseInt(editTextAmount.getText().toString()),
                             Integer.parseInt(editTextAmountInOne.getText().toString()), Integer.parseInt(editTextAmountInOne.getText().toString()),
-                            editTextExpiryDate.getText().toString(), editTextComments.getText().toString());
+                            dateInMilis, editTextComments.getText().toString());
                     Toast.makeText(NewMedicationActivity.this, medication.toString(), Toast.LENGTH_SHORT).show();
+
+                    MedicationDataBase medicationDataBase = new MedicationDataBase(NewMedicationActivity.this);
+                    medicationDataBase.addToDataBase(medication);
                 }
                 catch (Exception exception) {
                     Toast.makeText(NewMedicationActivity.this, "Error, invalid data format", Toast.LENGTH_SHORT).show();
-                    medication = new Medication(-1, "error", 0, 0, 0, "error", "error");
                 }
-
-                MedicationDataBase medicationDataBase = new MedicationDataBase(NewMedicationActivity.this);
-                medicationDataBase.addToDataBase(medication);
 
 
                 Intent broadcastIntent = new Intent(NewMedicationActivity.this, Broadcaster.class);
@@ -86,8 +93,11 @@ public class NewMedicationActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(Intent.ACTION_INSERT);
                 intent.setData(CalendarContract.Events.CONTENT_URI);
-                intent.putExtra(CalendarContract.Events.TITLE, "Take your medication: " + editTextName.getText().toString());
-                intent.putExtra(CalendarContract.Events.DESCRIPTION, "It's time to take your scheduled medication");
+                intent.putExtra(CalendarContract.Events.TITLE, "Your medication will expire soon (" + editTextName.getText().toString() + ")");
+                intent.putExtra(CalendarContract.Events.ALL_DAY, true);
+                //intent.putExtra(CalendarContract.Events.)
+                intent.putExtra(CalendarContract.Events.DESCRIPTION, "Your medication will expire soon, if it is a first-aid medicine for you," +
+                        " buy a new packaging and dispose of the old one, do not throw it directly into a common garbage can!\n");
 
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);

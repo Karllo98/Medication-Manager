@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Organizer">
-        <activity android:name="pl.edu.pwr.s249317.manager.TookMedicationActivity"></activity>
-        <activity android:name="pl.edu.pwr.s249317.manager.YourMedicationActivity" />
-        <activity android:name="pl.edu.pwr.s249317.manager.NewMedicationActivity" />
-        <activity android:name="pl.edu.pwr.s249317.manager.MainActivity">
+        <activity android:name=".ExpiryDatesActivity"></activity>
+        <activity android:name=".TookMedicationActivity" />
+        <activity android:name=".YourMedicationActivity" />
+        <activity android:name=".NewMedicationActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="pl.edu.pwr.s249317.manager.Broadcaster" />
+        <receiver android:name=".Broadcaster" />
     </application>
 
 </manifest>

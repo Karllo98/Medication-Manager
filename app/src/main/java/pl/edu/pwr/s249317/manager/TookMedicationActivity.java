@@ -11,7 +11,6 @@ import android.widget.ListView;
 public class TookMedicationActivity extends AppCompatActivity {
 
     private ListView actualMedicationList;
-    private ArrayAdapter arrayAdapter;
     private MedicationDataBase medicationDataBase;
 
     @Override
@@ -22,19 +21,20 @@ public class TookMedicationActivity extends AppCompatActivity {
         actualMedicationList = findViewById(R.id.actualMedicationList);
 
         medicationDataBase = new MedicationDataBase(TookMedicationActivity.this);
-        showAllMedications(medicationDataBase);
+        showAllMedicationsByAmount(medicationDataBase);
 
         actualMedicationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Medication medication = (Medication) parent.getItemAtPosition(position);
                 medicationDataBase.modifyMedicationAmount(medication);
-                showAllMedications(medicationDataBase);
+                showAllMedicationsByAmount(medicationDataBase);
             }
         });
     }
-    private void showAllMedications(MedicationDataBase dataBase) {
-        arrayAdapter = new ArrayAdapter<Medication>(TookMedicationActivity.this, android.R.layout.simple_list_item_1, dataBase.getAllMedications());
+    private void showAllMedicationsByAmount(MedicationDataBase dataBase) {
+        ArrayAdapter arrayAdapter = new ArrayAdapter<Medication>(TookMedicationActivity.this, android.R.layout.simple_list_item_1,
+                dataBase.getAllMedications("EXPIRY_DATE"));
         actualMedicationList.setAdapter(arrayAdapter);
     }
 }

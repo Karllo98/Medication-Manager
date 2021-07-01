@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonNext, buttonAdd, buttonYourMedications;
+    private Button buttonTook, buttonAdd, buttonYourMedications, buttonExpiryDates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initialazeViews();
 
-        buttonNext.setOnClickListener(new View.OnClickListener() {
+        buttonTook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, TookMedicationActivity.class);
@@ -40,11 +40,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        buttonExpiryDates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ExpiryDatesActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initialazeViews(){
-        buttonNext = findViewById(R.id.buttonNext);
+        buttonTook = findViewById(R.id.buttonTook);
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonYourMedications = findViewById(R.id.buttonYourMedications);
+        buttonExpiryDates = findViewById(R.id.buttonExpiryDates);
     }
 }

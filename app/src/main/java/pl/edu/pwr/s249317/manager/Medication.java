@@ -31,12 +31,19 @@ public class Medication {
         Date date = new Date(expiryDate);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM");
         String formattedDate = simpleDateFormat.format(date);
+        String message ="";
+
+        if (System.currentTimeMillis() >= expiryDate) {
+            formattedDate = formattedDate + " EXPIRED!";
+            message = "!!This medication is overdue!!";
+        }
+
 
         return  name + "\n" + "\n" +
                 "Amount: " + packagingAmount + "\n" +
                 "Amount in one package: " + amountInOnePackage + "\n" +
                 "Expiry Date: " + formattedDate + "\n" +
-                "Comments: " + comments + "\n";
+                "Comments: " + message + comments + "\n";
     }
 
     /* Getters and Setters */

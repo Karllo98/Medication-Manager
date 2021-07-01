@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonTook, buttonAdd, buttonYourMedications, buttonExpiryDates;
+    private Button buttonTook, buttonAdd, buttonYourMedications, buttonExpiryDates, buttonMedicalCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        buttonMedicalCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MedicalCardActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initialazeViews(){
@@ -55,5 +63,6 @@ public class MainActivity extends AppCompatActivity {
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonYourMedications = findViewById(R.id.buttonYourMedications);
         buttonExpiryDates = findViewById(R.id.buttonExpiryDates);
+        buttonMedicalCard = findViewById(R.id.buttonMedicalCard);
     }
 }

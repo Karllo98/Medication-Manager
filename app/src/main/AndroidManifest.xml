@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Organizer">
-        <activity android:name=".ExpiryDatesActivity"></activity>
+        <activity android:name=".MedicalCardActivity"></activity>
+        <activity android:name=".ExpiryDatesActivity" />
         <activity android:name=".TookMedicationActivity" />
         <activity android:name=".YourMedicationActivity" />
         <activity android:name=".NewMedicationActivity" />

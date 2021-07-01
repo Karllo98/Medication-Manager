@@ -3,6 +3,8 @@ package pl.edu.pwr.s249317.manager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -20,6 +22,19 @@ public class ExpiryDatesActivity extends AppCompatActivity {
 
         medicationDataBase = new MedicationDataBase(ExpiryDatesActivity.this);
         showAllMedicationsByExpireDate(medicationDataBase);
+
+        expiryDatesList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Medication medication = (Medication) parent.getItemAtPosition(position);
+
+                if (System.currentTimeMillis() >= medication.getExpiryDate()){
+                    medicationDataBase.deleteFromDataBase(medication);
+                    showAllMedicationsByExpireDate(medicationDataBase);
+                }
+                return false;
+            }
+        });
 
     }
 

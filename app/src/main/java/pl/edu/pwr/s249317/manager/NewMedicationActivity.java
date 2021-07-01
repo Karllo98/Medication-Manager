@@ -31,14 +31,7 @@ public class NewMedicationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_medication);
         makeChannelNotifiaction();
 
-        buttonConfirmAdding = findViewById(R.id.buttonConfirmAdding);
-        buttonGoToYourMedication = findViewById(R.id.buttonGoToYourMedications);
-        buttonAddToCalendar = findViewById(R.id.buttonAddToCalendar);
-        editTextName = findViewById(R.id.editTextName);
-        editTextAmount = findViewById(R.id.editTextAmount);
-        editTextAmountInOne = findViewById(R.id.editTextAmountInOne);
-        editTextExpiryDate = findViewById(R.id.editTextExpiryDate);
-        editTextComments = findViewById(R.id.editTextComments);
+        initialazeViews();
 
         buttonConfirmAdding.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,17 +57,12 @@ public class NewMedicationActivity extends AppCompatActivity {
                     Toast.makeText(NewMedicationActivity.this, "Error, invalid data format", Toast.LENGTH_SHORT).show();
                 }
 
-
                 Intent broadcastIntent = new Intent(NewMedicationActivity.this, Broadcaster.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(NewMedicationActivity.this,0,broadcastIntent,0);
-
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-                //long currentTime = System.currentTimeMillis();
-
-                //long tenSecondsInMs = 1000 * 10;
-
-                //alarmManager.set(AlarmManager.RTC_WAKEUP, currentTime + tenSecondsInMs, pendingIntent);
+                long currentTime = System.currentTimeMillis();
+                long tenSecondsInMs = 1000 * 2;
+                alarmManager.set(AlarmManager.RTC_WAKEUP, currentTime + tenSecondsInMs, pendingIntent);
 
             }
         });
@@ -95,7 +83,7 @@ public class NewMedicationActivity extends AppCompatActivity {
                 intent.setData(CalendarContract.Events.CONTENT_URI);
                 intent.putExtra(CalendarContract.Events.TITLE, "Your medication will expire soon (" + editTextName.getText().toString() + ")");
                 intent.putExtra(CalendarContract.Events.ALL_DAY, true);
-                //intent.putExtra(CalendarContract.Events.)
+//                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, );
                 intent.putExtra(CalendarContract.Events.DESCRIPTION, "Your medication will expire soon, if it is a first-aid medicine for you," +
                         " buy a new packaging and dispose of the old one, do not throw it directly into a common garbage can!\n");
 
@@ -108,6 +96,17 @@ public class NewMedicationActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void initialazeViews() {
+        buttonConfirmAdding = findViewById(R.id.buttonConfirmAdding);
+        buttonGoToYourMedication = findViewById(R.id.buttonGoToYourMedications);
+        buttonAddToCalendar = findViewById(R.id.buttonAddToCalendar);
+        editTextName = findViewById(R.id.editTextName);
+        editTextAmount = findViewById(R.id.editTextAmount);
+        editTextAmountInOne = findViewById(R.id.editTextAmountInOne);
+        editTextExpiryDate = findViewById(R.id.editTextExpiryDate);
+        editTextComments = findViewById(R.id.editTextComments);
     }
 
     private void makeChannelNotifiaction(){

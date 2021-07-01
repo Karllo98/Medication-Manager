@@ -12,8 +12,8 @@ public class Broadcaster extends BroadcastReceiver{
     public void onReceive(Context context, Intent intent) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notifyMedication")
                 .setSmallIcon(R.drawable.logo)
-                .setContentTitle("Confirmed your medication!")
-                .setContentText("Confirmed your medication!")
+                .setContentTitle("New medication!")
+                .setContentText("A new medication has just been added")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);

@@ -1,4 +1,4 @@
-package pl.edu.pwr.s249317.organizer;
+package pl.edu.pwr.s249317.manager;
 
 import android.content.Context;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="pl.edu.pwr.s249317.organizer">
+    package="pl.edu.pwr.s249317.manager">
 
     <application
         android:allowBackup="true"
@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Organizer">
-        <activity android:name=".ExpiryDateActivity"></activity>
-        <activity android:name=".YourMedicationActivity" />
-        <activity android:name=".NewMedicationActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="pl.edu.pwr.s249317.manager.TookMedicationActivity"></activity>
+        <activity android:name="pl.edu.pwr.s249317.manager.YourMedicationActivity" />
+        <activity android:name="pl.edu.pwr.s249317.manager.NewMedicationActivity" />
+        <activity android:name="pl.edu.pwr.s249317.manager.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".Broadcaster" />
+        <receiver android:name="pl.edu.pwr.s249317.manager.Broadcaster" />
     </application>
 
 </manifest>

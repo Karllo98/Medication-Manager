@@ -1,17 +1,21 @@
-package pl.edu.pwr.s249317.organizer;
+package pl.edu.pwr.s249317.manager;
 
 public class Medication {
 
     private int id;
     private String name;
-    private int amount;
+    private int packagingAmount;
+    private int amountInOnePackage;
+    private int amountInNewOne;
     private String expiryDate;
     private String comments;
 
-    public Medication(int id, String name, int amount, String expiryDate, String comments) {
+    public Medication(int id, String name, int packagingAmount, int amountInOnePackage, int amountInNewOne, String expiryDate, String comments) {
         this.id = id;
         this.name = name;
-        this.amount = amount;
+        this.packagingAmount = packagingAmount;
+        this.amountInOnePackage = amountInOnePackage;
+        this.amountInNewOne = amountInNewOne;
         this.expiryDate = expiryDate;
         this.comments = comments;
     }
@@ -21,7 +25,8 @@ public class Medication {
     @Override
     public String toString() {
         return  name + "\n" + "\n" +
-                "Amount: " + amount + "\n" +
+                "Amount: " + packagingAmount + "\n" +
+                "Amount in one package: " + amountInOnePackage + "\n" +
                 "Expiry Date: " + expiryDate + "\n" +
                 "Comments: " + comments + "\n";
     }
@@ -44,12 +49,12 @@ public class Medication {
         this.name = name;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getPackagingAmount() {
+        return packagingAmount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setPackagingAmount(int packagingAmount) {
+        this.packagingAmount = packagingAmount;
     }
 
     public String getExpiryDate() {
@@ -62,6 +67,18 @@ public class Medication {
 
     public String getComments() {
         return comments;
+    }
+
+    public int getAmountInOnePackage() {
+        return amountInOnePackage;
+    }
+
+    public void setAmountInOnePackage(int amountInOnePackage) {
+        this.amountInOnePackage = amountInOnePackage;
+    }
+
+    public int getAmountInNewOne() {
+        return amountInNewOne;
     }
 
     public void setComments(String comments) {

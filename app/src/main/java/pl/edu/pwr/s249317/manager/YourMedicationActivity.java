@@ -1,4 +1,4 @@
-package pl.edu.pwr.s249317.organizer;
+package pl.edu.pwr.s249317.manager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,9 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import java.util.List;
 
 public class YourMedicationActivity extends AppCompatActivity {
 
@@ -49,9 +46,6 @@ public class YourMedicationActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        //List<Medication> allMedications = medicationDataBase.getAllMedications();
-
     }
 
     private void showAllMedications(MedicationDataBase dataBase) {

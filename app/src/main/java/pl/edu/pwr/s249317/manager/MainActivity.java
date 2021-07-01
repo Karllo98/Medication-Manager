@@ -1,4 +1,4 @@
-package pl.edu.pwr.s249317.organizer;
+package pl.edu.pwr.s249317.manager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ExpiryDateActivity.class);
+                Intent intent = new Intent(MainActivity.this, TookMedicationActivity.class);
                 startActivity(intent);
             }
         });

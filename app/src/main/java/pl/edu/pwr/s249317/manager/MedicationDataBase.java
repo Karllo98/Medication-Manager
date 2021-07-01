@@ -1,4 +1,4 @@
-package pl.edu.pwr.s249317.organizer;
+package pl.edu.pwr.s249317.manager;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,7 +16,9 @@ public class MedicationDataBase extends SQLiteOpenHelper {
     public static final String MEDICATION_TB = "MEDICATION_TB";
     public static final String ID = "ID";
     public static final String MEDICATION_NAME = "MEDICATION_NAME";
-    public static final String MEDICATION_AMOUNT = "MEDICATION_AMOUNT";
+    public static final String MEDICATION_PACKAGE_AMOUNT = "MEDICATION_PACKAGE_AMOUNT";
+    public static final String MEDICATION_IN_ONE_PACKAGE_AMOUNT = "MEDICATION_IN_ONE_PACKAGE_AMOUNT";
+    public static final String MEDICATION_IN_NEW_ONE = "MEDICATION_IN_NEW_ONE";
     public static final String EXPIRY_DATE = "EXPIRY_DATE";
     public static final String MEDICATION_COMMENTS = "MEDICATION_COMMENTS";
 
@@ -27,7 +29,8 @@ public class MedicationDataBase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE " + MEDICATION_TB + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                MEDICATION_NAME + " TEXT, " + MEDICATION_AMOUNT + " INT, " + EXPIRY_DATE + " TEXT, " + MEDICATION_COMMENTS + " TEXT)";
+                MEDICATION_NAME + " TEXT, " + MEDICATION_PACKAGE_AMOUNT + " INT, " + MEDICATION_IN_ONE_PACKAGE_AMOUNT + " INT, " +
+                MEDICATION_IN_NEW_ONE + " INT, " + EXPIRY_DATE + " TEXT, " + MEDICATION_COMMENTS + " TEXT)";
         db.execSQL(createTableStatement);
     }
 
@@ -41,7 +44,9 @@ public class MedicationDataBase extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(MEDICATION_NAME, medication.getName());
-        contentValues.put(MEDICATION_AMOUNT, medication.getAmount());
+        contentValues.put(MEDICATION_PACKAGE_AMOUNT, medication.getPackagingAmount());
+        contentValues.put(MEDICATION_IN_ONE_PACKAGE_AMOUNT, medication.getAmountInOnePackage());
+        contentValues.put(MEDICATION_IN_NEW_ONE, medication.getAmountInNewOne());
         contentValues.put(EXPIRY_DATE, medication.getExpiryDate());
         contentValues.put(MEDICATION_COMMENTS, medication.getComments());
 
@@ -65,38 +70,13 @@ public class MedicationDataBase extends SQLiteOpenHelper {
             do {
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);
-                int amount = cursor.getInt(2);
-                String expiryDate = cursor.getString(3);
-                String comments = cursor.getString(4);
+                int packagingAmount = cursor.getInt(2);
+                int amountInOnePackage = cursor.getInt(3);
+                int amountInNewOne = cursor.getInt(4);
+                String expiryDate = cursor.getString(5);
+                String comments = cursor.getString(6);
 
-                Medication medication = new Medication(id, name, amount, expiryDate, comments);
-                list.add(medication);
-
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        database.close();
-
-        return list;
-    }
-
-    public List<Medication> sortAllMedications() {
-
-        List<Medication> list = new ArrayList<>();
-        String query = "SELECT * FROM " + MEDICATION_TB + " ORDER BY " + EXPIRY_DATE;
-        SQLiteDatabase database = this.getReadableDatabase();
-        Cursor cursor = database.rawQuery(query, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                int id = cursor.getInt(0);
-                String name = cursor.getString(1);
-                int amount = cursor.getInt(2);
-                String expiryDate = cursor.getString(3);
-                String comments = cursor.getString(4);
-
-                Medication medication = new Medication(id, name, amount, expiryDate, comments);
+                Medication medication = new Medication(id, name, packagingAmount, amountInOnePackage, amountInNewOne, expiryDate, comments);
                 list.add(medication);
 
             } while (cursor.moveToNext());
@@ -116,5 +96,31 @@ public class MedicationDataBase extends SQLiteOpenHelper {
         if (cursor.moveToFirst())
             return true;
         else return false;
+    }
+
+    public void modifyMedicationAmount(Medication medication) {
+
+        int packagingAmount = medication.getPackagingAmount();
+        int amountInOnePackage = medication.getAmountInOnePackage();
+
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        if (packagingAmount > 1 || amountInOnePackage > 1 ) {
+
+            if (amountInOnePackage > 1)
+                --amountInOnePackage;
+            else {
+                --packagingAmount;
+                amountInOnePackage = medication.getAmountInNewOne();
+            }
+
+            contentValues.put(MEDICATION_PACKAGE_AMOUNT, packagingAmount);
+            contentValues.put(MEDICATION_IN_ONE_PACKAGE_AMOUNT, amountInOnePackage);
+
+            database.update(MEDICATION_TB, contentValues, "ID = ?", new String[]{Integer.toString(medication.getId())});
+
+        } else if (packagingAmount == 1 && amountInOnePackage == 1)
+            deleteFromDataBase(medication);
     }
 }

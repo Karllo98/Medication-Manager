@@ -1,14 +1,12 @@
-package pl.edu.pwr.s249317.organizer;
+package pl.edu.pwr.s249317.manager;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -22,7 +20,7 @@ public class NewMedicationActivity extends AppCompatActivity {
 
     private Button buttonConfirmAdding, buttonGoToYourMedication;
     private ImageButton buttonAddToCalendar;
-    private EditText editTextName, editTextAmount, editTextExpiryDate, editTextComments;
+    private EditText editTextName, editTextAmount, editTextAmountInOne, editTextExpiryDate, editTextComments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +33,7 @@ public class NewMedicationActivity extends AppCompatActivity {
         buttonAddToCalendar = findViewById(R.id.buttonAddToCalendar);
         editTextName = findViewById(R.id.editTextName);
         editTextAmount = findViewById(R.id.editTextAmount);
+        editTextAmountInOne = findViewById(R.id.editTextAmountInOne);
         editTextExpiryDate = findViewById(R.id.editTextExpiryDate);
         editTextComments = findViewById(R.id.editTextComments);
 
@@ -46,18 +45,17 @@ public class NewMedicationActivity extends AppCompatActivity {
 
                 try {
                     medication = new Medication(-1, editTextName.getText().toString(), Integer.parseInt(editTextAmount.getText().toString()),
+                            Integer.parseInt(editTextAmountInOne.getText().toString()), Integer.parseInt(editTextAmountInOne.getText().toString()),
                             editTextExpiryDate.getText().toString(), editTextComments.getText().toString());
                     Toast.makeText(NewMedicationActivity.this, medication.toString(), Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception exception) {
                     Toast.makeText(NewMedicationActivity.this, "Error, invalid data format", Toast.LENGTH_SHORT).show();
-                    medication = new Medication(-1, "error", 0, "error", "error");
+                    medication = new Medication(-1, "error", 0, 0, 0, "error", "error");
                 }
 
                 MedicationDataBase medicationDataBase = new MedicationDataBase(NewMedicationActivity.this);
-                boolean success = medicationDataBase.addToDataBase(medication);
-
-                Toast.makeText(NewMedicationActivity.this, "" + success, Toast.LENGTH_SHORT).show();
+                medicationDataBase.addToDataBase(medication);
 
 
                 Intent broadcastIntent = new Intent(NewMedicationActivity.this, Broadcaster.class);
@@ -65,11 +63,11 @@ public class NewMedicationActivity extends AppCompatActivity {
 
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-                long currentTime = System.currentTimeMillis();
+                //long currentTime = System.currentTimeMillis();
 
-                long tenSecondsInMs = 1000 * 10;
+                //long tenSecondsInMs = 1000 * 10;
 
-                alarmManager.set(AlarmManager.RTC_WAKEUP, currentTime + tenSecondsInMs, pendingIntent);
+                //alarmManager.set(AlarmManager.RTC_WAKEUP, currentTime + tenSecondsInMs, pendingIntent);
 
             }
         });

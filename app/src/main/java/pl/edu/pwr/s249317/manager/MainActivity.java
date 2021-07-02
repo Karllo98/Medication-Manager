@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initialazeViews();
+        initializeViews();
 
         buttonTook.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initialazeViews(){
+    private void initializeViews(){
         buttonTook = findViewById(R.id.buttonTook);
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonYourMedications = findViewById(R.id.buttonYourMedications);

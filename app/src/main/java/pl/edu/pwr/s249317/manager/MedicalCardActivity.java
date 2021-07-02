@@ -68,7 +68,7 @@ public class MedicalCardActivity extends AppCompatActivity {
 
     private String readFromFile(Context context) {
 
-        String ret = "";
+        String returnStr = "";
 
         try {
             InputStream inputStream = context.openFileInput("medical_data.txt");
@@ -84,15 +84,15 @@ public class MedicalCardActivity extends AppCompatActivity {
                 }
 
                 inputStream.close();
-                ret = stringBuilder.toString();
+                returnStr = stringBuilder.toString();
             }
         }
         catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
+            Log.e("activity login", "File not found: " + e.toString());
         } catch (IOException e) {
-            Log.e("login activity", "Cannot read file: " + e.toString());
+            Log.e("activity login", "Cannot read file: " + e.toString());
         }
 
-        return ret;
+        return returnStr;
     }
 }

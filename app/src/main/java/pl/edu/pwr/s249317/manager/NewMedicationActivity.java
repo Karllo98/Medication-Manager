@@ -42,8 +42,9 @@ public class NewMedicationActivity extends AppCompatActivity {
 
                 try {
 
-                    SimpleDateFormat simpleExpiryDateFormat = new SimpleDateFormat("yyyy/MM");
+                    SimpleDateFormat simpleExpiryDateFormat = new SimpleDateFormat("yyyy/MM", java.util.Locale.getDefault());
                     Date date = simpleExpiryDateFormat.parse(editTextExpiryDate.getText().toString());
+                    assert date != null;
                     long dateInMillis = date.getTime();
 
                     medication = new Medication(-1, editTextName.getText().toString(), Integer.parseInt(editTextAmount.getText().toString()),

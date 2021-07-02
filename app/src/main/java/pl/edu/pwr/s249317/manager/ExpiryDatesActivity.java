@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class ExpiryDatesActivity extends AppCompatActivity {
 
@@ -30,6 +31,7 @@ public class ExpiryDatesActivity extends AppCompatActivity {
 
                 if (System.currentTimeMillis() >= medication.getExpiryDate()){
                     medicationDataBase.deleteFromDataBase(medication);
+                    Toast.makeText(ExpiryDatesActivity.this, "Your medication has \n been removed!", Toast.LENGTH_SHORT).show();
                     showAllMedicationsByExpireDate(medicationDataBase);
                 }
                 return false;

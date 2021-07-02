@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class YourMedicationActivity extends AppCompatActivity {
 
@@ -40,6 +41,7 @@ public class YourMedicationActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Medication medication = (Medication) parent.getItemAtPosition(position);
                 medicationDataBase.deleteFromDataBase(medication);
+                Toast.makeText(YourMedicationActivity.this, "Your medication has \n been removed!", Toast.LENGTH_SHORT).show();
                 showAllMedicationsByAmount(medicationDataBase);
                 return false;
             }

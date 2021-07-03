@@ -23,7 +23,8 @@ public class Medication {
         this.comments = comments;
     }
 
-    public Medication() { }
+    public Medication() {
+    }
 
     @Override
     public String toString() {
@@ -31,7 +32,7 @@ public class Medication {
         Date date = new Date(expiryDate);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM");
         String formattedDate = simpleDateFormat.format(date);
-        String message ="";
+        String message = "";
 
         if (System.currentTimeMillis() >= expiryDate) {
             formattedDate = formattedDate + " EXPIRED!";
@@ -39,7 +40,7 @@ public class Medication {
         }
 
 
-        return  name + "\n" + "\n" +
+        return name + "\n" + "\n" +
                 "Amount: " + packagingAmount + "\n" +
                 "Amount in one package: " + amountInOnePackage + "\n" +
                 "Expiry Date: " + formattedDate + "\n" +

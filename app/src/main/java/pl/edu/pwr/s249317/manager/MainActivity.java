@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeViews(){
+    private void initializeViews() {
         buttonTook = findViewById(R.id.buttonTook);
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonYourMedications = findViewById(R.id.buttonYourMedications);

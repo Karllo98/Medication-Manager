@@ -29,7 +29,7 @@ public class ExpiryDatesActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Medication medication = (Medication) parent.getItemAtPosition(position);
 
-                if (System.currentTimeMillis() >= medication.getExpiryDate()){
+                if (System.currentTimeMillis() >= medication.getExpiryDate()) {
                     medicationDataBase.deleteFromDataBase(medication);
                     Toast.makeText(ExpiryDatesActivity.this, "Your medication has \n been removed!", Toast.LENGTH_SHORT).show();
                     showAllMedicationsByExpireDate(medicationDataBase);

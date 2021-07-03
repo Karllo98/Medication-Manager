@@ -60,8 +60,7 @@ public class NewMedicationActivity extends AppCompatActivity {
                     if (checkBoxReminder.isChecked())
                         setNewReminder(dateInMillis);
 
-                }
-                catch (Exception exception) {
+                } catch (Exception exception) {
                     Toast.makeText(NewMedicationActivity.this, "Error, invalid data format", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -88,8 +87,7 @@ public class NewMedicationActivity extends AppCompatActivity {
 
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Toast.makeText(NewMedicationActivity.this, "No calendar detected!", Toast.LENGTH_SHORT).show();
                 }
 
@@ -98,10 +96,9 @@ public class NewMedicationActivity extends AppCompatActivity {
     }
 
 
-
     private void setNewMedAlarm() {
         Intent broadcastIntent = new Intent(NewMedicationActivity.this, Broadcaster.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(NewMedicationActivity.this,0,broadcastIntent,0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(NewMedicationActivity.this, 0, broadcastIntent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         long currentTime = System.currentTimeMillis();
         long twoSecondsInMs = 1000 * 2;
@@ -120,8 +117,8 @@ public class NewMedicationActivity extends AppCompatActivity {
         checkBoxReminder = findViewById(R.id.checkBoxReminder);
     }
 
-    private void makeChannelNotifiaction(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+    private void makeChannelNotifiaction() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "MedicationManagerChannel";
             String description = "Channel for notifaction";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
@@ -136,7 +133,7 @@ public class NewMedicationActivity extends AppCompatActivity {
 
     private void setNewReminder(long date) {
         Intent broadcastIntent = new Intent(NewMedicationActivity.this, BroadcasterReminder.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(NewMedicationActivity.this,0,broadcastIntent,0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(NewMedicationActivity.this, 0, broadcastIntent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, date, pendingIntent);
     }

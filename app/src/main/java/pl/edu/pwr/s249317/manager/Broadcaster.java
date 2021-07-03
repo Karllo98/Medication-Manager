@@ -1,4 +1,5 @@
 package pl.edu.pwr.s249317.manager;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +7,7 @@ import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-public class Broadcaster extends BroadcastReceiver{
+public class Broadcaster extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {

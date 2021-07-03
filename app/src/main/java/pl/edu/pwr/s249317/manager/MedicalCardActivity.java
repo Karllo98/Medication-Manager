@@ -38,11 +38,11 @@ public class MedicalCardActivity extends AppCompatActivity {
                 String data = "Name: " + editTextPersonName.getText().toString() + "\n\n"
                         + "Surname: " + editTextSurname.getText().toString() + "\n\n"
                         + "Blood group: " + editTextBloodGroup.getText().toString();
-                writeToFile(data,MedicalCardActivity.this);
-                textMedicalData.setText(readFromFile(MedicalCardActivity.this));;
+                writeToFile(data, MedicalCardActivity.this);
+                textMedicalData.setText(readFromFile(MedicalCardActivity.this));
+                ;
             }
         });
-
 
 
     }
@@ -60,8 +60,7 @@ public class MedicalCardActivity extends AppCompatActivity {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("medical_data.txt", Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
     }
@@ -73,21 +72,20 @@ public class MedicalCardActivity extends AppCompatActivity {
         try {
             InputStream inputStream = context.openFileInput("medical_data.txt");
 
-            if ( inputStream != null ) {
+            if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                while ((receiveString = bufferedReader.readLine()) != null) {
                     stringBuilder.append("\n").append(receiveString);
                 }
 
                 inputStream.close();
                 returnStr = stringBuilder.toString();
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             Log.e("activity login", "File not found: " + e.toString());
         } catch (IOException e) {
             Log.e("activity login", "Cannot read file: " + e.toString());

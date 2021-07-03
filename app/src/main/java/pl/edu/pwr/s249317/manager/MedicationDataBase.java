@@ -106,7 +106,7 @@ public class MedicationDataBase extends SQLiteOpenHelper {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        if (packagingAmount > 1 || amountInOnePackage > 1 ) {
+        if (packagingAmount > 1 || amountInOnePackage > 1) {
 
             if (amountInOnePackage > 1)
                 --amountInOnePackage;

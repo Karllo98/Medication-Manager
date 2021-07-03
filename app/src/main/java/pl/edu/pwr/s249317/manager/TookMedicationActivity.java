@@ -32,6 +32,7 @@ public class TookMedicationActivity extends AppCompatActivity {
             }
         });
     }
+
     private void showAllMedicationsByAmount(MedicationDataBase dataBase) {
         ArrayAdapter arrayAdapter = new ArrayAdapter<Medication>(TookMedicationActivity.this, android.R.layout.simple_list_item_1,
                 dataBase.getAllMedications("EXPIRY_DATE"));
